@@ -1,4 +1,4 @@
-package academy.learnprogramming;
+package academy.learnprogramming.console;
 
 import java.util.Random;
 
