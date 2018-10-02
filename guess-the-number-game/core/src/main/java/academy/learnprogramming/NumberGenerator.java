@@ -1,4 +1,4 @@
-package academy.learnprogramming.console;
+package academy.learnprogramming;
 
 public interface NumberGenerator {
 

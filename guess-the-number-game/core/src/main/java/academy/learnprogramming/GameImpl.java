@@ -1,4 +1,4 @@
-package academy.learnprogramming.console;
+package academy.learnprogramming;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +10,14 @@ import javax.annotation.PreDestroy;
 public class GameImpl implements Game {
 
     private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
+
     @Autowired
     private NumberGenerator numberGenerator;
-    private int guessCount = 10;
+
+    @Autowired
+    @GuessCount
+    private int guessCount;
+
     private int number;
     private int guess;
     private int smallest;
@@ -22,12 +27,12 @@ public class GameImpl implements Game {
 
     @PostConstruct
     @Override
-    public void reset() {
-        smallest = 0;
-        guess = 0;
-        remainingGuesses = guessCount;
-        biggest = numberGenerator.getMaxNumber();
+    public void reset()  {
         number = numberGenerator.next();
+        guess = 0;
+        smallest = 0;
+        biggest = numberGenerator.getMaxNumber();
+        remainingGuesses = guessCount;
         log.debug("the number is {}", number);
     }
 
@@ -67,8 +72,12 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void check() {
+    public int getGuessCount() {
+        return guessCount;
+    }
 
+    @Override
+    public void check() {
         checkValidNumberRange();
 
         if(validNumberRange) {
@@ -80,7 +89,6 @@ public class GameImpl implements Game {
                 smallest = guess +1;
             }
         }
-
         remainingGuesses --;
     }
 
