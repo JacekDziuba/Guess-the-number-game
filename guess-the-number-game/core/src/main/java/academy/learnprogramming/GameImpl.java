@@ -3,6 +3,7 @@ package academy.learnprogramming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -17,9 +18,10 @@ public class GameImpl implements Game {
     @Autowired
     @GuessCount
     private int guessCount;
-
     private int number;
     private int guess;
+    @Autowired
+    @MinNumber
     private int smallest;
     private int biggest;
     private int remainingGuesses;
@@ -29,8 +31,8 @@ public class GameImpl implements Game {
     @Override
     public void reset()  {
         number = numberGenerator.next();
-        guess = 0;
-        smallest = 0;
+        guess = numberGenerator.getMinNumber();
+        smallest = numberGenerator.getMinNumber();
         biggest = numberGenerator.getMaxNumber();
         remainingGuesses = guessCount;
         log.debug("the number is {}", number);
