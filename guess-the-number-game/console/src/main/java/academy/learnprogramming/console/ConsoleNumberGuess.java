@@ -3,6 +3,7 @@ package academy.learnprogramming.console;
 import academy.learnprogramming.Game;
 import academy.learnprogramming.MessageGenerator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ public class ConsoleNumberGuess {
     private final MessageGenerator messageGenerator;
 
     // == constructors ==
+    @Autowired
     public ConsoleNumberGuess(Game game, MessageGenerator messageGenerator) {
         this.game = game;
         this.messageGenerator = messageGenerator;
